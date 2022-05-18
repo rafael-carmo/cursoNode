@@ -21,6 +21,24 @@ app.use(express.json())
 
 app.use(express.static('public'))
 
+app.get('/users/create', (req, res) => {
+    res.render('adduser')
+})
+app.post('/users/create', async (req, res) => {
+    const name = req.body.name
+    const occupation = req.body.occupation
+    const newsletter = req.body.newsletter === 'on' ? true : false
+
+    const user = {
+        name,
+        occupation,
+        newsletter
+    }
+    console.log(req.body)
+    await User.create(user)
+    res.redirect('/')
+})
+
 app.get('/', (req, res) => {
     res.render('home')
 })

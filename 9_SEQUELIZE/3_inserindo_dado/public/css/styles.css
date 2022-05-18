@@ -37,6 +37,15 @@ h1 {
     font-weight: bold;
     margin-bottom: .3em;
 }
+
+.form-checked {
+    flex-direction: row;
+}
+
+.form-checked input{
+    margin-right: 10px;
+}
+
 .form-control input { 
     padding: 5px;
 }
