@@ -58,22 +58,6 @@ app.get('/users/edit/:id', async (req, res) => {
 
     res.render('useredit', {user})
 })
-app.post('/users/edit/:id', async (req, res) => {
-    const id = req.body.id
-    const name = req.body.name
-    const occupation = req.body.occupation
-    const newsletter = req.body.newsletter
-
-    const user = {
-        id,
-        name,
-        occupation,
-        newsletter
-    }
-
-    await User.update(user, {where: {id}})
-    res.redirect('/')
-})
 
 app.get('/', async (req, res) => {
     const users = await User.findAll({raw: true})
