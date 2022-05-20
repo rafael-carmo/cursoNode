@@ -1,7 +1,7 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
 const { Pool } = require('pg')
-const connectionString = 'porgresql://xfweb:jadefluorescente@10.41.246.130:5432/pcivil-srh-teste';
+const sequelize = new Sequelize('postgres://usuario:senha@enderecoDoBanco:5432/nomeDoBanco')
 
 const app = express();
 

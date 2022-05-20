@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize')
-const sequelize = new Sequelize('postgres://xfweb:jadefluorescente@10.41.246.130:5432/pcivil-srh-teste')
+const sequelize = new Sequelize('postgres://usuario:senha@enderecoDoBanco:5432/nomeDoBanco')
 
 try {
     sequelize.authenticate()
