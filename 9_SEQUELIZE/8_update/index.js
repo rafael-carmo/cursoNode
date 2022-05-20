@@ -81,7 +81,10 @@ app.get('/', async (req, res) => {
     res.render('home', {users: users})
 })
 
-conn.sync()
+conn
+.sync() 
+//force: usado quando quer que as tabelas sejam recriadas (perda total dos dados)
+// .sync({force: true})
 .then(() => {
     app.listen(3000);
 
