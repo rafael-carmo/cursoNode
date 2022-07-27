@@ -33,11 +33,11 @@
     border-radius: 5px;
 }
 
-.navbar li:hover {
+.navbar a:hover {
     background-color: #16479d;
     color: #FFF;
 }
 
-.navbar li:hover > a {
+/* .navbar li:hover > a {
     color: #FFF;
-}
+} */

@@ -17,6 +17,7 @@ module.exports = class UserController {
         //validations
         if (!name) {
             res.status(422).json({ message: 'O nome é obrigatório' })
+            return
         }
 
         if (!email) {
