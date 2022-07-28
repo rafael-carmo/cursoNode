@@ -5,9 +5,9 @@ const Context = createContext()
 
 const UserProvider = ({children}) => {
 
-    const {authenticated, register} = useAuth()
+    const {authenticated, register, logout} = useAuth()
 
-    return <Context.Provider value={{authenticated, register}}>
+    return <Context.Provider value={{authenticated, register, logout}}>
         {children}
     </Context.Provider>
 }

@@ -9,8 +9,20 @@ import useFlashMessage from './useFlashMessage'
 export default function useAuth() {
 
     const [authenticated, setAuthenticated] = useState(false);
-    const {setFlashMessage} = useFlashMessage()
+    const { setFlashMessage } = useFlashMessage()
     const navigate = useNavigate()
+
+    useEffect(() => {
+        const token = localStorage.getItem('token')
+
+        if (token) {
+            /**sempre que enviar uma requisição com a api, estará enviando com o token,
+             * sem precisar fazer isso em cada request
+             */
+            api.defaults.headers.Authorization = `Bearer ${JSON.parse(token)}`
+            setAuthenticated(true)
+        }
+    }, []);
 
     async function register(user) {
 
@@ -34,9 +46,22 @@ export default function useAuth() {
     async function authUser(data) {
         setAuthenticated(true)
         localStorage.setItem('token', JSON.stringify(data.token))
-    
-        navigate('/')
-      }
 
-    return { authenticated, register }
+        navigate('/')
+    }
+
+    const logout = () => {
+        const msgText = 'Logout realizado com sucesso!'
+        const msgType = 'success'
+    
+        setAuthenticated(false)
+        localStorage.removeItem('token')
+        api.defaults.headers.Authorization = undefined
+        navigate('/login')
+    
+        setFlashMessage(msgText, msgType)
+      }
+    
+
+    return { authenticated, register, logout }
 }

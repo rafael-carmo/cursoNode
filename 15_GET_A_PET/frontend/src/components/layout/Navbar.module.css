@@ -38,6 +38,6 @@
     color: #FFF;
 }
 
-/* .navbar li:hover > a {
+.navbar li:hover > a {
     color: #FFF;
-} */
+}
