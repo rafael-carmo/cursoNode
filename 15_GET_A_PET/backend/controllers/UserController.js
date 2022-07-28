@@ -197,23 +197,13 @@ module.exports = class UserController {
         }
         user.phone = phone
 
-        if (!password) {
-            res.status(422).json({ message: 'A senha é obrigatória!' })
-            return
-        }
-
-        if (!confirmpassword) {
-            res.status(422).json({ message: 'A confirmação de senha é obrigatória!' })
-            return
-        }
-
         // //check if password match
-        if (password !== confirmpassword) {
+        if (password != confirmpassword) {
             res.status(422).json({ message: 'As senhas não conferem' })
             return
         //change password   
         //Usuário enviou uma senha e as duas são iguais, ele quer alterar a senha 
-        } else if(password === confirmpassword ) {
+        } else if(password == confirmpassword && password != null) {
             //criar senha criptografada
             const salt = await bcrypt.genSalt(12)
             const passwordHash = await bcrypt.hash(password, salt)

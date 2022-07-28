@@ -24,9 +24,14 @@ const Navbar = () => {
           <Link to={'/'}>Adotar</Link>
         </li>
         {authenticated ? (
-          <li onClick={logout}>
-            Sair
-          </li>
+          <>
+            <li>
+              <Link to={'/user/profile'}>Perfil</Link>
+            </li>
+            <li>
+              <a href="" onClick={logout}>Sair</a>              
+            </li>
+          </>
         ) : (
           <>
             <li>
@@ -37,7 +42,7 @@ const Navbar = () => {
             </li>
           </>
         )}
-    </ul>
+      </ul>
     </nav >
   )
 }

@@ -50,18 +50,36 @@ export default function useAuth() {
         navigate('/')
     }
 
+    const login = async (user) => {
+        let msgText = 'Login realizado com sucesso!'
+        let msgType = 'success'
+
+        try {
+            const data = await api.post('/users/login', user).then((response) => {
+                return response.data
+            })
+
+            await authUser(data)
+        } catch (error) {
+            msgText = error.response.data.message
+            msgType = 'error'
+        }
+
+        setFlashMessage(msgText, msgType)
+    }
+
     const logout = () => {
         const msgText = 'Logout realizado com sucesso!'
         const msgType = 'success'
-    
+
         setAuthenticated(false)
         localStorage.removeItem('token')
         api.defaults.headers.Authorization = undefined
         navigate('/login')
-    
-        setFlashMessage(msgText, msgType)
-      }
-    
 
-    return { authenticated, register, logout }
+        setFlashMessage(msgText, msgType)
+    }
+
+
+    return { authenticated, register, login, logout }
 }
