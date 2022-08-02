@@ -237,15 +237,17 @@ module.exports = class PetController {
         }
         updatedData.available = available
 
-        if (images.length === 0) {
-            res.status(422).json({ message: 'A imagem é obrigatória!' })
-            return
-        }
-        updatedData.images = []
+        // if (images.length === 0) {
+        //     res.status(422).json({ message: 'A imagem é obrigatória!' })
+        //     return
+        // }
 
-        images.map((image) => {
-            updatedData.images.push(image.filename)
-        })
+        if(images.length > 0) {
+            updatedData.images = []
+            images.map((image) => {
+                updatedData.images.push(image.filename)
+            })
+        }
 
         await Pet.findByIdAndUpdate(id, updatedData)
 
