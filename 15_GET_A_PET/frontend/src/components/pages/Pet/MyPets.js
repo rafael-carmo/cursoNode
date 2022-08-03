@@ -25,7 +25,22 @@ const MyPets = () => {
     }, [token]);
 
     const concludeAdoption = async (id) => {
+        let msgType = 'success'
 
+        const data = await api.patch(`/pets/conclude/${id}`, {
+            headers: {
+                Authorization: `Bearer ${JSON.parse(token)}`,
+            },
+        })
+        .then((response) => {
+            return response.data
+        })
+        .catch((error) => {
+            msgType = 'error'
+            return error.response.data
+        })
+
+        setFlashMessage(data.message, msgType)
     }
 
     const removePet = async (id) => {
@@ -75,7 +90,7 @@ const MyPets = () => {
                                                     concludeAdoption(pet._id)
                                                 }}
                                             >
-                                                Concluir Ação
+                                                Concluir Adoção
                                             </button>
                                         )}
                                         <Link to={`/pet/edit/${pet._id}`}>Editar</Link>
